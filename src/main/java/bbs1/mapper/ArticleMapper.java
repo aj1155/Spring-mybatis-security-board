@@ -9,4 +9,6 @@ public interface ArticleMapper {
     Article selectById(int id);
     List<Article> selectPage(Pagination pagination);
     int selectCount(Pagination pagination);
+    void insert(Article article);
+    void updateReadCount(int id);
 }

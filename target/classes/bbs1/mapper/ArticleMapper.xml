@@ -40,4 +40,18 @@
           )
     </select>
 
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT bbs.Article
+               (boardId, [no], userId, writeTime, readCount, title, body)
+        VALUES (#{boardId},
+                IsNULL((SELECT MAX([no]) FROM bbs.Article WHERE boardId = #{boardId}), 0) + 1,
+                #{userId}, GETDATE(), 0, #{title}, #{body})
+    </insert>
+
+    <update id="updateReadCount">
+        UPDATE bbs.Article
+        SET readCount = readCount + 1
+        WHERE id = #{id}
+    </update>
+
 </mapper>

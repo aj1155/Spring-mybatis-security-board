@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <style>
     td:nth-child(5) { width: 40px; text-align: right; }
 </style>
@@ -12,6 +13,14 @@
 <form:form method="get" modelAttribute="pagination" class="pagination">
     <input type="hidden" name="pg" value="1" />
     <form:hidden path="bd" />
+
+    <div class="pull-right">
+        <sec:authorize access="authenticated">
+            <a href="create.do?${ pagination.queryString }" class="btn btn-info">
+                <i class="icon-pencil icon-white"></i> 글쓰기
+            </a>
+        </sec:authorize>
+    </div>
 
     <div class="form-inline">
         <form:select path="ss">

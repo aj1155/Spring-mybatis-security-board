@@ -5,7 +5,7 @@
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="/bbs1">BBS1</a>
-           
+            
                 <ul class="nav">
                     <li><a href="/bbs1/bbs/list.do?bd=1"> 공지사항 </a>
                     <li><a href="/bbs1/bbs/list.do?bd=2"> 자유게시판 </a>
@@ -21,7 +21,7 @@
                         <li><a href="/bbs1/home/logout.do">로그아웃</a></li>
                     </sec:authorize>
                 </ul>
-         
+            
         </div>
     </div>
 </div>
