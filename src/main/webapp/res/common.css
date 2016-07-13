@@ -1,0 +1,6 @@
+thead { background: #eee; }
+tbody tr[data-url]:hover { background-color: #ffa; cursor: pointer; }
+form.pagination div.form-inline { margin-bottom: 5px; }
+form.pagination select[name=ss] { width: 100px; }
+form.pagination select[name=sz] { width: 80px; float: right; }
+form.pagination select[name=od] { width: 150px; margin-right: 100px; }

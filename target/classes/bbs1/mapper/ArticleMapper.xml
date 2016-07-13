@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bbs1.mapper.ArticleMapper">
+
+    <select id="selectById" resultType="bbs1.dto.Article">
+        SELECT a.*, u.name
+        FROM bbs.Article a LEFT JOIN dbo.[User] u ON a.userId = u.id
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="selectPage" resultType="bbs1.dto.Article">
+        <![CDATA[
+        SELECT *
+        FROM
+            ( SELECT a.id, boardId, [no], userId, writeTime, readCount, title, u.name,
+                     ROW_NUMBER() OVER (ORDER BY a.id DESC) 행번호
+              FROM bbs.Article a LEFT JOIN dbo.[User] u ON a.userId = u.id
+              WHERE boardId = #{boardId} AND
+                ( (#{srchType} = 0) OR
+                  (#{srchType} = 1 AND CHARINDEX(#{srchText}, name) = 1) OR
+                  (#{srchType} IN (2,3) AND CHARINDEX(#{srchText}, title) > 0) OR
+                  (#{srchType} = 3 AND CHARINDEX(#{srchText}, body) > 0)
+                )
+            ) subquery
+        WHERE 행번호 > (#{currentPage} - 1) * #{pageSize} AND
+              행번호 <= #{currentPage} * #{pageSize}
+        ORDER BY 행번호
+        ]]>
+    </select>
+
+    <select id="selectCount" resultType="int">
+        SELECT COUNT(*)
+        FROM bbs.Article a LEFT JOIN dbo.[User] u ON a.userId = u.id
+        WHERE boardId = #{boardId} AND
+          ( (#{srchType} = 0) OR
+            (#{srchType} = 1 AND CHARINDEX(#{srchText}, name) = 1) OR
+            (#{srchType} IN (2,3) AND CHARINDEX(#{srchText}, title) > 0) OR
+            (#{srchType} = 3 AND CHARINDEX(#{srchText}, body) > 0)
+          )
+    </select>
+
+</mapper>
