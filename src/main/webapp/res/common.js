@@ -11,4 +11,7 @@ $(function() {
     $("[data-auto-submit=true]").change(function() {
         $(this).parents("form").submit();
     });
+    $("[data-confirm]").click(function() {
+        return confirm($(this).attr("data-confirm"));
+    });
 });

@@ -120,12 +120,17 @@ public class Pagination {
     }
 
     /* 멤버 변수 값들을 quey string으로 출력하기 위한 메소드 */
-    public String getQueryString() throws UnsupportedEncodingException {
-        String temp = (srchText == null) ? "" : URLEncoder.encode(srchText, "UTF-8");
+    public String getQueryString() {
+        String temp = "";
+        try {
+            temp = (srchText == null) ? "" : URLEncoder.encode(srchText, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+        }
         if (boardId > 0)
            return String.format("pg=%d&sz=%d&bd=%d&ss=%d&st=%s", currentPage, pageSize, boardId, srchType, temp);
         return String.format("pg=%d&sz=%d&od=%d&ss=%d&st=%s", currentPage, pageSize, order, srchType, temp);
     }
+
 
     /* 화면 하단에 페이지 번호 링크들을 출력하기 위한 메소드와 클래스 */
     public List<Page> getPageList() {

@@ -11,4 +11,6 @@ public interface ArticleMapper {
     int selectCount(Pagination pagination);
     void insert(Article article);
     void updateReadCount(int id);
+    void update(Article article);
+    void delete(int id);
 }

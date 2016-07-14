@@ -53,5 +53,16 @@
         SET readCount = readCount + 1
         WHERE id = #{id}
     </update>
+    
+    <update id="update">
+        UPDATE bbs.Article
+        SET title = #{title}, body = #{body}, writeTime = GETDATE()
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM bbs.Article WHERE id = #{id}
+    </delete>
+    
 
 </mapper>

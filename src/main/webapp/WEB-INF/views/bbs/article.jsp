@@ -11,7 +11,19 @@
 </style>
 
 <div class="pull-right">
-    <a href="list.do?${ pagination.queryString }" class="btn">
+	<c:if test="${ canEdit }">
+        <a href="edit.do?id=${article.id}&${pagination.queryString}" class="btn">
+            <i class="icon-pencil"></i> 수정
+        </a>
+    </c:if>
+    <c:if test="${ canDelete }">
+       <a href="delete.do?id=${article.id}&${pagination.queryString}" class="btn"
+          data-confirm="삭제하시겠습니까?">
+           <i class="icon-remove"></i> 삭제
+       </a>
+    </c:if>
+    
+	<a href="list.do?${ pagination.queryString }" class="btn">
         <i class="icon-list"></i> 목록으로
     </a>
 </div>
@@ -27,6 +39,10 @@
     <span class="lbl">작성일:</span> <span class="txt">
         <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${ article.writeTime }" /></span>
     <span class="lbl">조회수:</span> <span class="txt">${ article.readCount }</span>
+    <span class="lbl">첨부파일:</span>
+    <c:forEach var="file" items="${files }">
+    	<a class="btn btn-small" href="/bbs1/bbs/download.do?id=${file.id}"><i class="icon icon-file"></i>${ file.fileName }</a>
+    </c:forEach>
     <hr />
 </div>
 
