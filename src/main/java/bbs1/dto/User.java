@@ -1,13 +1,20 @@
 package bbs1.dto;
 
-public class User {
-    int id;
+import java.io.Serializable;
+import java.util.Date;
+
+
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	int id;
     String loginId;
     String passwd;
     String name;
     String email;
     String userType;
     Integer departmentId;
+    Date time;
 
     String departmentName;
 
@@ -73,6 +80,14 @@ public class User {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+    
+    public Date getTime(){
+    	return time;
+    }
+    
+    public void setTime(Date time){
+    	this.time = time;
     }
 
 }

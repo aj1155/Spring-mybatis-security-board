@@ -8,6 +8,7 @@ import bbs1.dto.User;
 public interface UserMapper {
     User selectById(int id);
     User selectByLoginId(String loginId);
+    List<User> selectByDepartmentId(int departmentId);
     List<User> selectAll();
     List<User> selectPage(Pagination pagination);
     int selectCount(Pagination pagination);

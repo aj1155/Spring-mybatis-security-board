@@ -12,6 +12,10 @@
         SELECT * FROM [User] WHERE loginId = #{loginId}
     </select>
 
+    <select id="selectByDepartmentId" resultType="bbs1.dto.User">
+        SELECT * FROM [User] WHERE departmentId = #{departmentId}
+    </select>
+
     <select id="selectAll" resultType="bbs1.dto.User">
         SELECT u.*, d.departmentName
         FROM [User] u LEFT JOIN department d ON u.departmentId = d.id

@@ -10,6 +10,16 @@
                     <li><a href="/bbs1/bbs/list.do?bd=1"> 공지사항 </a>
                     <li><a href="/bbs1/bbs/list.do?bd=2"> 자유게시판 </a>
                     <li><a href="/bbs1/user/list.do">사용자 관리</a></li>
+                	<li class="dropdown">
+                		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                			테스트<b class="caret"></b></a>
+                		<ul class="dropdown-menu">
+                			<li><a href="/bbs1/mybatis/cacheTest.do">myBatis Cache Test</a>
+                			<li><a href="/bbs1/mybatis/departmentUserList1.do">departmentUserList1</a></li>
+                			<li><a href="/bbs1/mybatis/departmentUserList2.do">departmentUserList2</a></li>
+                			<li><a href="/bbs1/mybatis/dynamicSQL.do">dynamicSQL</a></li>
+                		</ul>
+                	</li>
                 </ul>
                 <ul class="nav pull-right">
                     <sec:authorize access="not authenticated">

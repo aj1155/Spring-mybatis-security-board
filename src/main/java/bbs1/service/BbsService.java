@@ -1,13 +1,21 @@
 package bbs1.service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bbs1.dto.Article;
 import bbs1.dto.User;
+import bbs1.mapper.ArticleImageMapper;
+
 
 @Service
 public class BbsService {
+	
+	@Autowired ArticleImageMapper articleImageMapper;
 	public boolean isAuthor(Article article) {
         return (UserService.getCurrentUser() != null) &&
                (article.getUserId() == UserService.getCurrentUser().getId());
@@ -39,6 +47,18 @@ public class BbsService {
             return "내용을 입력하세요";
         return null;
     }
+    
+    public void updateArticleImage(Article article) {
+        articleImageMapper.deleteByArticleId(article.getId());
+        String pattern = "bbs/([0-9]+)/image.do";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(article.getBody());
+        while (m.find()) {
+            int imageId = Integer.parseInt(m.group(1));
+            articleImageMapper.insert(article.getId(), imageId);
+        }
+    }
+
 
 
 }
